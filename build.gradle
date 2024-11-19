@@ -1,0 +1,43 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+}
+
+group = 'lt.ignitis.gpc.code.check' // Replace with your group ID
+version = '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+}
+
+gradlePlugin {
+    plugins {
+        pmdCheckPlugin {
+            id = 'lt.ignitis.code-quality'
+            implementationClass = 'lt.ignitis.gpc.code.check.CodeQualityPlugin'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'net.sourceforge.pmd:pmd-java:6.55.0' // Ensure PMD dependency is added
+}
+
+publishing {
+    repositories {
+        mavenLocal()
+    }
+    publications {
+        gradlePlugin(MavenPublication) {
+            from components.java
+        }
+        library(MavenPublication) {
+            artifactId = 'my-library'
+            from components.java
+        }
+    }
+}
