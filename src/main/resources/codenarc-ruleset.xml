@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeNarcRuleset xmlns="http://codenarc.org/ruleset/1.0"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
+                 xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd">
+    <Rule ref="rulesets/groovy/strings.xml">
+        <Rule name="DuplicateStringLiteral">
+            <Property name="maxOccurrences" value="2"/>
+        </Rule>
+    </Rule>
+</CodeNarcRuleset>

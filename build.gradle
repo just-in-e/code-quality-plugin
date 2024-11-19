@@ -10,9 +10,15 @@ java {
     sourceCompatibility = JavaVersion.VERSION_11
 }
 
+tasks.withType(Jar) {
+    from('src/main/resources') {
+        into 'config'
+    }
+}
+
 gradlePlugin {
     plugins {
-        pmdCheckPlugin {
+        CodeQualityPlugin {
             id = 'lt.ignitis.code-quality'
             implementationClass = 'lt.ignitis.gpc.code.check.CodeQualityPlugin'
         }
@@ -24,7 +30,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'net.sourceforge.pmd:pmd-java:6.55.0' // Ensure PMD dependency is added
+    implementation 'net.sourceforge.pmd:pmd-java:6.55.0'
+    implementation 'org.codenarc:CodeNarc:3.3.0'
 }
 
 publishing {
