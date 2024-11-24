@@ -5,20 +5,21 @@ plugins {
 
 group = 'lt.ignitis.gpc.code.check' // Replace with your group ID
 version = '1.0.0'
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-}
+java.sourceCompatibility = JavaVersion.VERSION_11
 
 tasks.withType(Jar) {
     from('src/main/resources') {
-        into 'config'
+        into 'config' // Copy rule files into config directory
     }
+}
+
+tasks.processResources {
+    exclude '**/*.xml'  // Exclude all XML files in the resources directory
 }
 
 gradlePlugin {
     plugins {
-        CodeQualityPlugin {
+        codeQualityPlugin {
             id = 'lt.ignitis.code-quality'
             implementationClass = 'lt.ignitis.gpc.code.check.CodeQualityPlugin'
         }
