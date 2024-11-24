@@ -66,7 +66,6 @@ public class CodeQualityPlugin implements Plugin<Project> {
 
             // Load the remote ruleset
 //            Path rulesetPath = downloadRemoteRuleset(project, "https://raw.githubusercontent.com/just-in-e/code-quality-rules/refs/heads/main/codenarc-ruleset.xml", "codenarc-ruleset.xml");
-//            codeNarc.setConfigFile(rulesetPath.toFile());
 
             // Load ruleset from resources
             Path rulesetPath = copyRulesetToTemp(project, "codenarc-ruleset.xml");

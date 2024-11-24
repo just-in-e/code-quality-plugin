@@ -41,8 +41,16 @@ public class RulesetFileUtility {
 
     public static Path copyRulesetToTemp(Project project, String rulesetFilename) {
         try {
-            // Create a temporary file for the ruleset
+
+            // Define the path for the temporary ruleset file
             Path tempRulesetFile = project.getBuildDir().toPath().resolve(rulesetFilename);
+
+            // Check if the file already exists
+//            if (Files.exists(tempRulesetFile)) {
+//                return tempRulesetFile; // Return the existing file
+//            }
+
+            // Create parent directories if they don't exist
             Files.createDirectories(tempRulesetFile.getParent());
 
             // Load the resource as a stream and copy it to the temporary location
