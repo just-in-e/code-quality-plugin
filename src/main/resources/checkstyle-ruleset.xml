@@ -473,7 +473,7 @@
 
         <!-- Rule 1: Enforce local variables always use 'var' -->
         <module name="MatchXpath">
-            <property name="query" value="//VARIABLE_DEF[ancestor::METHOD_DEF and not(./TYPE/IDENT[@text='var'])]"/>
+            <property name="query" value="//VARIABLE_DEF[ancestor::METHOD_DEF and not(./TYPE/IDENT[@text='var']) and ./ASSIGN]"/>
             <message key="matchxpath.match"
                      value="New instances should be created via 'var' keyword to avoid duplication of type reference in statement"/>
         </module>
