@@ -7,11 +7,11 @@ group = 'lt.ignitis.gpc.code.check' // Replace with your group ID
 version = '1.0.0'
 java.sourceCompatibility = JavaVersion.VERSION_11
 
-tasks.withType(Jar) {
-    from('src/main/resources') {
-        into 'config' // Copy rule files into config directory
-    }
-}
+//tasks.withType(Jar) {
+//    from('src/main/resources') {
+//        into 'config' // Copy rule files into config directory
+//    }
+//}
 
 //tasks.processResources {
 //    exclude '**/*.xml'  // Exclude all XML files in the resources directory
@@ -43,9 +43,9 @@ publishing {
         gradlePlugin(MavenPublication) {
             from components.java
         }
-        library(MavenPublication) {
-            artifactId = 'my-library'
-            from components.java
-        }
+//        library(MavenPublication) {
+//            artifactId = 'my-library'
+//            from components.java
+//        }
     }
 }
