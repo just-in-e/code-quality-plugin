@@ -13,9 +13,9 @@ tasks.withType(Jar) {
     }
 }
 
-tasks.processResources {
-    exclude '**/*.xml'  // Exclude all XML files in the resources directory
-}
+//tasks.processResources {
+//    exclude '**/*.xml'  // Exclude all XML files in the resources directory
+//}
 
 gradlePlugin {
     plugins {

@@ -13,6 +13,9 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import static lt.ignitis.gpc.code.check.utility.RulesetFileUtility.copyRulesetToTemp;
+import static lt.ignitis.gpc.code.check.utility.RulesetFileUtility.downloadRemoteRuleset;
+
 public class CodeQualityPlugin implements Plugin<Project> {
 
     @Override
@@ -56,37 +59,13 @@ public class CodeQualityPlugin implements Plugin<Project> {
             codeNarc.setMaxPriority2Violations(0); // Fail on priority 2 violations
 
             // Load the remote ruleset
-            Path rulesetPath = downloadRemoteRuleset(project, "https://raw.githubusercontent.com/just-in-e/code-quality-rules/refs/heads/main/codenarc-ruleset.xml");
+//            Path rulesetPath = downloadRemoteRuleset(project, "https://raw.githubusercontent.com/just-in-e/code-quality-rules/refs/heads/main/codenarc-ruleset.xml", "codenarc-ruleset.xml");
+//            codeNarc.setConfigFile(rulesetPath.toFile());
+
+            // Load ruleset from resources
+            Path rulesetPath = copyRulesetToTemp(project, "codenarc-ruleset.xml");
             codeNarc.setConfigFile(rulesetPath.toFile());
         });
     }
 
-    private Path downloadRemoteRuleset(Project project, String remoteUrl) {
-        try {
-            // Create a temporary file for the ruleset
-            Path tempRulesetFile = project.getBuildDir().toPath().resolve("codenarc-ruleset-remote.xml");
-            Files.createDirectories(tempRulesetFile.getParent());
-
-            // Open connection to the remote URL
-            URL url = new URL(remoteUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setConnectTimeout(5000);
-            connection.setReadTimeout(5000);
-
-            // Check for successful response
-            if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                throw new IOException("Failed to download ruleset: HTTP " + connection.getResponseCode());
-            }
-
-            // Save the response content to a file
-            try (InputStream inputStream = connection.getInputStream()) {
-                Files.copy(inputStream, tempRulesetFile, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
-            }
-
-            return tempRulesetFile;
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to download CodeNarc ruleset from remote source", e);
-        }
-    }
 }
