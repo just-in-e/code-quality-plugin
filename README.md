@@ -30,3 +30,44 @@
 20. Praziurek dar sonar warning situose testuose (https://gitlab.ignitis.lt/eims/microservices/dt-energy-integration-service/-/merge_requests/58#note_169917)
 21. Yra pasikartojancio teksto, pasikartojantis tekstas turi buti kaip konstanta (https://gitlab.ignitis.lt/eims/microservices/dt-energy-integration-service/-/merge_requests/58#note_169926)
 22. Edit var rule - for not initialised variables. Ex. String request = null;
+
+## MR checks:
+### Check in web
+
+- visual check for slashes, commas or other studd missing
+- code formatted
+- imports with asterisks
+- local types: var, def
+- private final for autowired instance fields
+- access modifiers for constant: set private or protected if needed
+- check log - are those necessary?
+- Lib for pulsar test is used?
+
+### Check in properites
+
+- no primitive types egsists
+- validatation NotEmpty for strings, lists, NotNull for  other types set.
+- Swwagger @Schema is futureproof for OpenApi 3
+- no new properties on enabler branch.
+- class renames in enabler branch + DEVELOPMENT.
+
+### Check in local env
+
+- unused imports
+- Run tests locally
+- Run coverage on new files
+- check codestyle, sonarlink warnings
+
+### Ansible
+
+- only secret info should be placed here
+
+### Check in code
+
+- starterio versija, kitu naudojamu lib'u versija
+- update README
+- lint java code
+- format code
+
+### Additional
+- NotImplemented annotation. Should be always true in controller.
