@@ -13,12 +13,12 @@ public class RulesetFileUtility {
     public static Path downloadRemoteRuleset(Project project, String remoteUrl, String rulesetFileName) {
         try {
             // Create a temporary file for the ruleset
-            Path tempRulesetFile = project.getBuildDir().toPath().resolve(rulesetFileName);
+            var tempRulesetFile = project.getBuildDir().toPath().resolve(rulesetFileName);
             Files.createDirectories(tempRulesetFile.getParent());
 
             // Open connection to the remote URL
-            URL url = new URL(remoteUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            var url = new URL(remoteUrl);
+            var connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setConnectTimeout(5000);
             connection.setReadTimeout(5000);
@@ -43,12 +43,12 @@ public class RulesetFileUtility {
         try {
 
             // Define the path for the temporary ruleset file
-            Path tempRulesetFile = project.getBuildDir().toPath().resolve(rulesetFilename);
+            var tempRulesetFile = project.getBuildDir().toPath().resolve(rulesetFilename);
 
             // Check if the file already exists
-//            if (Files.exists(tempRulesetFile)) {
-//                return tempRulesetFile; // Return the existing file
-//            }
+            if (Files.exists(tempRulesetFile)) {
+                return tempRulesetFile; // Return the existing file
+            }
 
             // Create parent directories if they don't exist
             Files.createDirectories(tempRulesetFile.getParent());

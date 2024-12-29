@@ -1,7 +1,9 @@
 ### code-quality-plugin
 
 ## JAVA rules:
+Custom rules:
 - var usage for local variables
+- illegal shaded library import
 
 ## GROOVY rules:
 - def usage for local variables
